@@ -1,0 +1,16 @@
+.left-nav {
+  width: 300px;
+  border: 1px solid #000;
+}
+
+@media screen and (max-width: 980px) {
+  .left-nav {
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .left-nav {
+    display: none;
+  }
+}
