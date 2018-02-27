@@ -1,0 +1,17 @@
+.home {
+  width: 80%;
+  display: flex;
+  margin: 0 auto;
+  padding: 60px 0;
+}
+
+@media screen and (max-width: 1200px) {
+  .home {
+    width: 90%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .home {
+    width: 95%;
+  }
+}
