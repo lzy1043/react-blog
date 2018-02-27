@@ -1,0 +1,21 @@
+.articles-list-container {
+  width: 70%;
+  overflow: hidden;
+}
+.articles-list {
+  width: 100%;
+  margin: 0;
+  padding: 0 20px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 768px) {
+  .articles-list {
+    padding: 0;
+  }
+  .articles-list-container {
+    width: 100%;
+  }
+}
