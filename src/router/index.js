@@ -1,13 +1,14 @@
-import ArticlesList from '../Articles/ArticlesList'
+import Home from '../Home'
 import Open from '../Open'
 import About from '../About'
+import ArticlesList from '../Articles/ArticlesList'
 import ArticleDetail from '../Articles/ArticleDetail'
 export default [
   {
     name: '首页',
     path: '/',
     isNav: true,
-    component: ArticlesList,
+    component: Home,
     navLink: '/'
   },
   {

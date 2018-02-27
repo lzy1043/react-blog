@@ -44,7 +44,8 @@
 }
 .nav-item > a {
   display: block;
-  padding: 0 20px;
+  padding: 0 30px;
+  margin-right: -20px;
   color: #fff;
   text-decoration: none;
   transition: all 0.3s ease;
@@ -57,7 +58,7 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 768px) {
   nav {
     position: relative;
   }
