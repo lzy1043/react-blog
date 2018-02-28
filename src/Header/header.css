@@ -8,9 +8,14 @@
   top: 0;
   background-color: transparent;
 }
+.scroll {
+  background: linear-gradient(to right,#1a1818 35%,#353030 100%);
+}
 .header .avatar {
   height: 40px;
   width: 40px;
+  position: relative;
+  z-index: 2;
 }
 .header .avatar img {
   width: 100%;
@@ -60,19 +65,28 @@
 
 @media screen and (max-width: 768px) {
   nav {
-    position: relative;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
   }
   .nav-bread {
     display: block;
+    padding-right: 20px;
+  }
+  .scroll .nav-lists {
+    background: linear-gradient(to right,#1a1818 35%,#353030 100%);
   }
   .nav-lists {
-    display: none;
-    height: auto;
+    opacity: 0;
+    height: 0;
     flex-direction: column;
     overflow: hidden;
+    animation-name: slideup;
+    animation-duration: 0.3s;
+    animation-timing-function: ease-in-out;
   }
-  .nav-lists::before {
-    content: "";
+  .header .visible-line {
     position: fixed;
     height: 1px;
     line-height: 1;
@@ -86,25 +100,42 @@
     height: auto;
     line-height: 1;
     padding: 25px 10px 0;
+    text-align: right;
   }
   .nav-lists.visible {
-    display: block;
-    animation-name: slide;
+    opacity: 1;
+    height: 180px;
+    animation-name: slidedown;
     animation-duration: 0.3s;
     animation-timing-function: ease-in-out;
   }
 }
 
-@keyframes slide {
+@keyframes slidedown {
   from {
     transform: translate3d(0, -50px, 0);
     opacity: 0;
+    height: 0;
   }
   to {
     transform: translate3d(0, 0, 0);
     opacity: 1;
+    height: 180px
   }
 }
+@keyframes slideup {
+  to {
+    transform: translate3d(0, -50px, 0);
+    opacity: 0;
+    height: 0;
+  }
+  from {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+    height: 180px;
+  }
+}
+
 .navlink-active {
   color: #0097a7!important;
 }

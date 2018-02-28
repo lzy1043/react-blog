@@ -15,7 +15,7 @@ export default class ArticlesListItem extends Component {
   }
 
   render() {
-    const BASE_URL = `url(//ozft0883x.bkt.clouddn.com/${this.randomPic()}.jpg)`
+    const BASE_URL = `url(//ozft0883x.bkt.clouddn.com/${this.randomPic()}.jpg?imageMogr2/thumbnail/700x/blur/1x0/quality/75)`
     const divStyle = {
       backgroundImage: BASE_URL,
       backgroundSize: 'cover',
