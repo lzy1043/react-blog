@@ -21,7 +21,6 @@ export default class ArticlesListItem extends Component {
       backgroundSize: 'cover',
       backgroundPosition: 'center'
     }
-    console.log(divStyle)
     return (
      <li className="article-item-container" key={this.props.articlesItem['_id']}>
         <div className="article-item">

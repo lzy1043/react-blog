@@ -31,3 +31,20 @@
     opacity: 1;
   }
 }
+@media screen and (max-width: 768px) {
+  .banner {
+    height: 300px;
+    line-height: 300px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .banner {
+    height: 200px;
+    line-height: 200px;
+  }
+  .banner p {
+    transform: skew(0);
+    padding: 0;
+  }
+}
