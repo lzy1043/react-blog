@@ -9,7 +9,8 @@ export default class Header extends Component {
     super()
     this.state = {
       className: 'nav-lists',
-      scrollClass: ''
+      scrollClass: '',
+      flag: true
     }
     this.handleNavListVisible = this.handleNavListVisible.bind(this)
   }
@@ -27,13 +28,15 @@ export default class Header extends Component {
   componentDidMount () {
     window.addEventListener('scroll', () => {
       let scrollTop = document.documentElement.scrollTop || document.body.scrollTop
-      if (scrollTop > 10 ) {
+      if (scrollTop === 0 ) {
         this.setState({
-          scrollClass: 'scroll'
+          scrollClass: '',
+          flag: true
         })
-      } else {
+      } else if (scrollTop >= 10 && this.state.flag) {
         this.setState({
-          scrollClass: ''
+          scrollClass: 'scroll',
+          flag: false
         })
       }
     })

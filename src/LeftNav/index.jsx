@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import './left-nav.css'
 
@@ -58,7 +59,7 @@ export default class LeftNav extends Component {
             {
               category && category.map((item, index) => (
                 <li className="ln-category-item" key={index}>
-                  <span>{item.name}</span>
+                  <Link to={`category/${item.name}`} >{item.name}</Link>
                   <span className="ln-count">（{item.count}）</span>
                 </li>
               ))
@@ -72,8 +73,8 @@ export default class LeftNav extends Component {
           <h3 className="ln-item-title">标签</h3>
           <div className="ln-list ln-tags-list">
             {
-              tags && tags.map(tag => (
-              <span className="ln-tag-item">{tag.name}</span>
+              tags && tags.map((tag, index) => (
+              <span className="ln-tag-item" key={index}>{tag.name}</span>
             ))
             }
           </div>

@@ -7,7 +7,6 @@ import 'font-awesome/css/font-awesome.min.css'
 import './App.css'
 
 import Header from '../Header'
-import Banner from '../Banner'
 import NotFound from '../NotFound'
 
 class App extends Component {
@@ -16,7 +15,6 @@ class App extends Component {
       <Router>
         <div className="blog">
           <Header />
-          <Banner />
           <Switch>
             {
               routers.map((router, index) => (
