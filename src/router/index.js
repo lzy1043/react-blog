@@ -36,7 +36,7 @@ export default [
   },
   {
     name: '文章详情',
-    path: '/articles/:id',
+    path: '/article/:id',
     component: ArticleDetail
   }
 ]
