@@ -1,4 +1,7 @@
 .home {
+  width: 100%;
+}
+.home-wrapper {
   width: 80%;
   display: flex;
   margin: 0 auto;
@@ -6,12 +9,12 @@
 }
 
 @media screen and (max-width: 1200px) {
-  .home {
+  .home-wrapper {
     width: 90%;
   }
 }
 @media screen and (max-width: 768px) {
-  .home {
+  .home-wrapper {
     width: 95%;
   }
 }
