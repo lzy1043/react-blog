@@ -3,6 +3,7 @@ import Open from '../Open'
 import About from '../About'
 import ArticlesList from '../Articles/ArticlesList'
 import ArticleDetail from '../Articles/ArticleDetail'
+import Archives from '../Archives'
 export default [
   {
     name: '首页',
@@ -13,9 +14,14 @@ export default [
   },
   {
     name: '分类',
-    path: '/category',
+    path: '/archives',
     isNav: true,
-    component: ArticlesList
+    component: Archives
+  },
+  {
+    name: '分类',
+    path: '/archive/:type',
+    component: Archives
   },
   {
     name: '开源',
@@ -38,5 +44,10 @@ export default [
     name: '文章详情',
     path: '/article/:id',
     component: ArticleDetail
+  },
+  {
+    name: '文章详情',
+    path: '/search/:keyword',
+    component: Archives
   }
 ]
