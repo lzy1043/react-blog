@@ -2,6 +2,7 @@
   display: inline-block;
   width: 31%;
   margin-bottom: 20px;
+  margin-right: 3%;
 }
 .article-item-container:nth-child(3n) {
   margin-right: 0;
@@ -56,12 +57,15 @@
 .article-descp {
   height: 80px;
   line-height: 26px;
-  font-size: 16px;
+  font-size: 14px;
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   cursor: pointer;
+}
+.article-descp a {
+  color: #666;
 }
 .article-content {
   width: 100%;
@@ -92,10 +96,17 @@
   .article-item-container {
     width: 48%;
   }
+  .article-item-container:nth-child(3n) {
+    margin-right: 3%;
+  }
+  .article-item-container:nth-child(2n) {
+    margin-right: 0;
+  }
 }
 @media screen and (max-width: 768px) {
   .article-item-container {
     width: 100%;
+    margin-right: 0;
   }
   .article-pic {
     height: 200px;

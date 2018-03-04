@@ -11,19 +11,14 @@ export default class ArticlesListItem extends Component {
     return moment(time).format(format)
   }
 
-  randomPic () {
-    return Math.floor(Math.random() * 20)
-  }
-
   render() {
-    const BASE_URL = `url(//ozft0883x.bkt.clouddn.com/${this.randomPic()}.jpg?imageMogr2/thumbnail/700x/blur/1x0/quality/75)`
+    const { articlesItem } = this.props
+    const BASE_URL = `url(${articlesItem.bg}?imageMogr2/thumbnail/700x/blur/1x0/quality/75)`
     const divStyle = {
       backgroundImage: BASE_URL,
       backgroundSize: 'cover',
       backgroundPosition: 'center'
     }
-    const { articlesItem } = this.props
-    console.log(this.props)
     return (
      <li className="article-item-container" key={articlesItem['_id']}>
         <div className="article-item">
@@ -37,11 +32,11 @@ export default class ArticlesListItem extends Component {
           </Link>
           <div className="article-content">
             <h3 className="article-title">
-              <Link to={`article/${articlesItem['_id']}`}>{this.props.articlesItem.title}</Link>
+              <Link to={`/article/${articlesItem['_id']}`}>{this.props.articlesItem.title}</Link>
             </h3>
             <p className="article-author"><span className="author-by">by</span>胖先生</p>
-            <div className="article-descp"><Link to={`article/${articlesItem['_id']}`}>{articlesItem.description}</Link></div>
-            <p className="article-category"><i className="fa fa-tag"></i><Link to={`category/${articlesItem.category}`} className="article-category-text">
+            <div className="article-descp"><Link to={`/article/${articlesItem['_id']}`}>{articlesItem.description}</Link></div>
+            <p className="article-category"><i className="fa fa-tag"></i><Link to={`/category/${articlesItem.category}`} className="article-category-text">
             {articlesItem.category}</Link></p>
           </div>
         </div>
