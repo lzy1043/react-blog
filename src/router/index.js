@@ -4,8 +4,7 @@ import About from '../About'
 import ArticlesList from '../Articles/ArticlesList'
 import ArticleDetail from '../Articles/ArticleDetail'
 import Archives from '../Archives'
-export default [
-  {
+export default [{
     name: '首页',
     path: '/',
     isNav: true,
@@ -23,12 +22,12 @@ export default [
     path: '/archive/:type',
     component: Archives
   },
-  {
-    name: '开源',
-    path: '/open',
-    isNav: true,
-    component: Open
-  },
+  // {
+  //   name: '开源',
+  //   path: '/open',
+  //   isNav: true,
+  //   component: Open
+  // },
   {
     name: '关于',
     path: '/about',
@@ -44,6 +43,11 @@ export default [
     name: '文章详情',
     path: '/article/:id',
     component: ArticleDetail
+  },
+  {
+    name: '分页',
+    path: '/page/:page',
+    component: Home
   },
   {
     name: '文章详情',
