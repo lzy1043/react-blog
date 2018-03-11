@@ -4,6 +4,7 @@ import { API_BASE_URL } from '../config'
 import ArticleList from '../Articles/ArticlesList'
 import LeftNav from '../LeftNav'
 import Banner from '../Banner'
+import Pagination from '../Pagination'
 import './home.css'
 
 export default class Home extends Component {
@@ -11,17 +12,33 @@ export default class Home extends Component {
   constructor () {
     super()
     this.state = {
-      articlesList: []
+      articlesList: [],
+      currentPage: 1,
+      count: 0
     }
   }
 
   componentDidMount () {
-    axios.get(`${API_BASE_URL}/article?page=1`)
-      .then(res => {
-        if (res.data && res.data.code === 0) {
-          const data = res.data.data
+    const page = this.props.match.params.page || 1
+    this.fetchArticleList(page)
+  }
+
+  componentWillUpdate (nextProps) {
+    if (nextProps.location.pathname !== this.props.location.pathname) {
+      const page = nextProps.match.params.page
+      this.fetchArticleList(page)
+    }
+  }
+
+  fetchArticleList (page) {
+    axios.get(`${API_BASE_URL}/article?page=${page}`)
+      .then(response => {
+        if (response.data && response.data.code === 0) {
+          const res = response.data
           this.setState({
-            articlesList: data
+            articlesList: res.data,
+            currentPage: res.page,
+            count: res.total
           })
         }
       })
@@ -30,15 +47,17 @@ export default class Home extends Component {
       })
   }
 
+
   render () {
-    const { articlesList } = this.state
+    const { articlesList, currentPage, count } = this.state
     return (
       <div className="home">
         <Banner />
         <div className="home-wrapper">
           <ArticleList articlesList={articlesList} />
           <LeftNav />
-        </div>  
+        </div>
+        <Pagination page={currentPage} count={count} />
       </div>
     )
   }
