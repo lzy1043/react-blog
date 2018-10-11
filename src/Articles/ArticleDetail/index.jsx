@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import LeftNav from '../../LeftNav'
 import '../../assets/markdown.css'
 import '../../assets/github.css'
 import './article-detail.css'
-import { API_BASE_URL } from '../../config'
+import { fetchCurrentArticleContent } from '../../store/actions'
+import { connect } from 'react-redux'
 
-export default class ArticleDetail extends Component {
+class ArticleDetail extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -14,40 +14,45 @@ export default class ArticleDetail extends Component {
     }
   }
 
-  fetchArticleDetail (id) {
-    axios.get(`${API_BASE_URL}/article/${id}`)
-      .then(response => {
-        if (response.data && response.data.code === 0) {
-          this.setState({
-            articleDetail: response.data.data
-          })
-        }
-      })
-  }
-
   componentDidMount () {
     const articleId = this.props.match.params.id
-    this.fetchArticleDetail(articleId)
+    const { dispatch } = this.props
+    dispatch(fetchCurrentArticleContent(articleId))
   }
 
   componentWillUpdate (nextProps) {
     if (nextProps.location.pathname !== this.props.location.pathname) {
       const articleId = nextProps.match.params.id
-      this.fetchArticleDetail(articleId)
+      const { dispatch } = this.props
+      dispatch(fetchCurrentArticleContent(articleId))
     }
   }
 
   render() {
-    const { articleDetail } = this.state
-    const html = {__html: articleDetail.htmlcont}
+    const { content } = this.props
+    
+    const html = content ? {__html: content.htmlcont} : {__html: ''}
     return (
-     <div className="article-detail">
-      <div className="ad-wrapper">
-        <img className="ad-pic" src={articleDetail.bg} alt="bg" />
-        <div className="markdown-body" dangerouslySetInnerHTML={html}></div>
+      <div className="article-detail">
+        {
+          content && (
+            <div className="ad-wrapper">
+              <img className="ad-pic" src={content && content.bg} alt="bg" />
+              <div className="markdown-body" dangerouslySetInnerHTML={html}></div>
+            </div>
+          )
+        }
+        <LeftNav />
       </div>
-      <LeftNav />
-     </div>
     );
   }
 }
+
+const mapStateToProps = state => {
+  const { content } = state
+  return {
+    content
+  }
+}
+
+export default connect(mapStateToProps)(ArticleDetail)

@@ -1,5 +1,4 @@
 import Home from '../Home'
-import Open from '../Open'
 import About from '../About'
 import ArticlesList from '../Articles/ArticlesList'
 import ArticleDetail from '../Articles/ArticleDetail'

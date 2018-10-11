@@ -1,63 +1,19 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
 import './left-nav.css'
-import { API_BASE_URL } from '../config'
 import moment from 'moment'
+import { connect } from 'react-redux'
+import { fetchCategorys, fetchTags } from '../store/actions'
 
-export default class LeftNav extends Component {
+class LeftNav extends Component {
   constructor () {
     super()
     this.state = {
       category: [],
       tags: [],
-      articles: [],
       keyword: ''
     }
     this.handleInputChange = this.handleInputChange.bind(this)
-  }
-
-  fetchCategories () {
-    axios.get(`${API_BASE_URL}/category/info`)
-      .then(response => {
-        if (response.data.code === 1) {
-          this.setState({
-            category: response.data.data
-          })
-        }
-      })
-      .catch (e => {
-        console.log(e)
-      })
-  }
-
-  fetchTags () {
-    axios.get(`${API_BASE_URL}/category`)
-      .then(response => {
-        if (response.data.code === 0) {
-          this.setState({
-            tags: response.data.data.tags
-          })
-        }
-      })
-      .catch (e => {
-        console.log(e)
-      })
-  }
-
-  fetchNewArticles () {
-    axios.get(`${API_BASE_URL}/article?page=1&size=4`)
-      .then(res => {
-        if (res.data && res.data.code === 0) {
-          const data = res.data.data
-          this.setState({
-            articles: data
-          })
-        }
-      })
-      .catch(e => {
-        console.log(e)
-      })
   }
 
   formatDate (time) {
@@ -65,9 +21,9 @@ export default class LeftNav extends Component {
   }
 
   componentDidMount () {
-    this.fetchCategories()
-    this.fetchTags()
-    this.fetchNewArticles()
+    const { dispatch } = this.props
+    dispatch(fetchCategorys())
+    dispatch(fetchTags())
   }
 
   handleInputChange (e) {
@@ -77,7 +33,9 @@ export default class LeftNav extends Component {
   }
 
   render () {
-    const { category, tags, articles, keyword } = this.state
+    const { keyword } = this.state
+    const { category, tags, articles } = this.props
+    const tmpArticles = articles.slice(0, 4)
     return (
       <div className="left-nav">
         <div className="lt-search">
@@ -105,7 +63,7 @@ export default class LeftNav extends Component {
           <h3 className="ln-item-title">最新文章</h3>
           <ul className="ln-list ln-articles-list">
             {
-              articles && articles.map((item, index) => (
+              tmpArticles && tmpArticles.map((item, index) => (
                 <li className="ln-articles-item" key={index}>
                   <Link to={`/article/${item['_id']}`} className="ln-article-link">
                     <div className="ln-article-thumb">
@@ -135,3 +93,11 @@ export default class LeftNav extends Component {
     )
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    ...state
+  }
+}
+
+export default connect(mapStateToProps)(LeftNav)
