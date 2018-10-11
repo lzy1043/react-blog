@@ -1,35 +1,35 @@
-export const reducers = (state, action) => {
-  const { type, payload } = action
-  if (!state) {
-    state = {
-      articles: [],
-      category: [],
-      tags: [],
-      content: null
+import { combineReducers } from 'redux'
+
+const createReducers = (initialState, handles) => {
+  return (state = initialState, actions) => {
+    const { type } = actions
+    if (handles.hasOwnProperty(type)) {
+      return handles[type](state, actions)
+    } else {
+      return state
     }
   }
-  switch (type) {
-    case 'UPDATE_ARTICLES':
-      return {
-        ...state,
-        articles: payload
-      }
-    case 'UPDATE_CATEGORY':
-    return {
-      ...state,
-      category: payload
-    }
-    case 'UPDATE_TAGS':
-    return {
-      ...state,
-      tags: payload
-    }
-    case 'UPDATE_ARTICLE_CONTENT':
-      return {
-        ...state,
-        content: payload
-      }
-    default:
-      return state
-  }  
 }
+
+const articlesState = createReducers([], {
+  'UPDATE_ARTICLES': (state, actions) => actions.payload || state
+})
+
+const categoryState = createReducers([], {
+  'UPDATE_CATEGORY': (state, actions) => actions.payload || state
+})
+
+const tagsState = createReducers([], {
+  'UPDATE_TAGS': (state, actions) => actions.payload || state
+})
+
+const contentState = createReducers([], {
+  'UPDATE_ARTICLE_CONTENT': (state, actions) => actions.payload || state
+})
+
+export default combineReducers({
+  articles: articlesState,
+  category: categoryState,
+  tags: tagsState,
+  content: contentState
+})
